@@ -5,14 +5,14 @@ from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
-    PROJECT_NAME: str
+    PROJECT_NAME: str = "apex"
     BACKEND_CORS_ORIGINS: List[AnyHttpUrl] = []
-    API_PRIVATE_KEY_FILE: str
-    ZITADEL_DOMAIN: str
-    ZITADEL_INTROSPECTION_URL: str
-    API_BASE_URL: str
-    DATABASE_URL: str
-    DATABASE_NAME: str
+    API_PRIVATE_KEY_FILE: str = "<none>.json"
+    ZITADEL_DOMAIN: str = "http://localhost:8080"
+    ZITADEL_INTROSPECTION_URL: str = "http://localhost:8080/oauth/v2/introspect"
+    API_BASE_URL: str = "http://localhost:8000"
+    DATABASE_URL: str = "mongodb://localhost:27017"
+    DATABASE_NAME: str = "apexlikeproject"
 
     @validator("BACKEND_CORS_ORIGINS", pre=True)
     def assemble_cors_origins(cls, v: Union[str, List[str]]) -> Union[List[str], str]:
