@@ -11,6 +11,8 @@ class Settings(BaseSettings):
     ZITADEL_DOMAIN: str
     ZITADEL_INTROSPECTION_URL: str
     API_BASE_URL: str
+    DATABASE_URL: str
+    DATABASE_NAME: str
 
     @validator("BACKEND_CORS_ORIGINS", pre=True)
     def assemble_cors_origins(cls, v: Union[str, List[str]]) -> Union[List[str], str]:

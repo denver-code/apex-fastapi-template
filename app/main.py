@@ -1,8 +1,10 @@
+from beanie import init_beanie
 from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.authorization import auth_required
 
 from app.core.config import settings
+from app.core.database import db
 
 
 def get_application():
@@ -20,6 +22,16 @@ def get_application():
 
 
 app = get_application()
+
+
+@app.on_event("startup")
+async def on_startup():
+    await init_beanie(
+        database=db,
+        document_models=[
+            # Add your models here
+        ],
+    )
 
 
 @app.get("/")
